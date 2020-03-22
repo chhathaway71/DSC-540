@@ -1,0 +1,31 @@
+# 'current_weather.txt' is original data pull
+# 'list_weather.txt' is a list of dictionaries with new, single catagories
+# 'weather.txt' will be final cleaned up list of dicitionaries,
+# with new headers and cleaned up timezones and temperature categories.
+
+weather_dict = {}
+weather = []
+
+# Need beginning of loop over list_weather.txt
+
+# Creates catagories and load new weather list of dictionaries
+weather['Visibility'] = d['visibility']
+weather['Date'] = d['dt']
+weather['City'] = d['name']
+weather['Longitude'] = d['coord_lon']
+weather['Latitude'] = d['coord_lat']
+weather['Country'] = d['sys_country']
+weather['Timezone'] = d['sys_timezone']
+weather['Sunrise'] = d['sys_sunrise']
+weather['Sunset'] = d['sys_sunset']
+weather['Temp'] = d['main_temp']
+weather['Pressure'] = d['main_pressure']
+weather['Humidity'] = d['main_humidity']
+weather['Max_Temp'] = d['main_temp_max']
+weather['Min_Temp'] = d['main_temp_min']
+weather['Wind_Speed'] = d['wind_speed']
+weather['Clouds'] = d['clouds_all']
+weather['Weather_Cond'] = d['weather_main']
+weather['Weather_Desc'] = d['weather_desc']
+
+    

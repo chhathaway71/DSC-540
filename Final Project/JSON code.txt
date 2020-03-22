@@ -1,0 +1,40 @@
+# First we need a function which will flatten the JSON objects:
+
+def flattenjson( b, delim ):
+    val = {}
+    for i in b.keys():
+        if isinstance( b[i], dict ):
+            get = flattenjson( b[i], delim )
+            for j in get.keys():
+                val[ i + delim + j ] = get[j]
+        else:
+            val[i] = b[i]
+
+    return val
+
+# Run on json file
+flattenjson(weather_data) # or whatever name of file is.
+
+# After applying this function to each dict in the input array of JSON objects:
+
+input = map( lambda x: flattenjson( x, "__" ), input )
+
+# and finding the relevant column names:
+
+columns = [ x for row in input for x in row.keys() ]
+columns = list( set( columns ) )
+
+# it's not hard to run this through the csv module:
+
+with open( fname, 'wb' ) as out_file:
+    csv_w = csv.writer( out_file )
+    csv_w.writerow( columns )
+
+    for i_r in input:
+        csv_w.writerow( map( lambda x: i_r.get( x, "" ), columns ) )
+
+# Rather than convert to csv, try transforming the json file
+# Then do pretty printing
+
+import json
+print(json.dumps(filename, sort_keys=True, indent=4)) #filename = name of my weather file
